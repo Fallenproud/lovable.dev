@@ -1,0 +1,63 @@
+{
+  "layouts": {
+    "MarketingLayout": { 
+      "appliesTo": ["/", "/pricing", "/docs", "/docs/*", "/blog", "/blog/*", "/changelog", "/integrations", "/legal/*", "/login", "/signup", "/forgot-password"],
+      "description": "Public marketing pages with header/footer"
+    },
+    "AppLayout": { 
+      "appliesTo": ["/app/*", "/orgs/*"], 
+      "guard": "auth",
+      "description": "Authenticated app with sidebar navigation"
+    }
+  },
+  "guards": {
+    "auth": { 
+      "redirectUnauthedTo": "/login",
+      "description": "Requires authentication"
+    },
+    "org": { 
+      "param": "orgId", 
+      "notFoundRedirect": "/app",
+      "description": "Validates organization access"
+    }
+  },
+  "routes": [
+    { "path": "/", "seo": { "title": "Build something Lovable - Create apps and websites by chatting with AI", "description": "Create apps and websites by chatting with AI", "index": true }, "layout": "MarketingLayout" },
+    { "path": "/pricing", "seo": { "title": "Pricing - Lovable", "description": "Choose the perfect plan for your needs" }, "layout": "MarketingLayout" },
+    { "path": "/docs", "seo": { "title": "Documentation - Lovable", "description": "Learn how to use Lovable" }, "layout": "MarketingLayout" },
+    { "path": "/docs/*", "seo": { "title": "Documentation", "description": "Lovable documentation" }, "layout": "MarketingLayout" },
+    { "path": "/blog", "seo": { "title": "Blog - Lovable", "description": "Latest news and updates" }, "layout": "MarketingLayout" },
+    { "path": "/blog/:slug", "seo": { "title": "Blog Post", "description": "Blog post" }, "layout": "MarketingLayout" },
+    { "path": "/changelog", "seo": { "title": "Changelog - Lovable", "description": "Latest product updates and releases" }, "layout": "MarketingLayout" },
+    { "path": "/integrations", "seo": { "title": "Integrations - Lovable", "description": "Connect Lovable with your favorite tools" }, "layout": "MarketingLayout" },
+    { "path": "/login", "seo": { "title": "Log in - Lovable", "description": "Sign in to your account", "index": false }, "layout": "MarketingLayout" },
+    { "path": "/signup", "seo": { "title": "Sign up - Lovable", "description": "Create your account", "index": false }, "layout": "MarketingLayout" },
+    { "path": "/forgot-password", "seo": { "title": "Reset Password - Lovable", "description": "Reset your password", "index": false }, "layout": "MarketingLayout" },
+    { "path": "/legal/terms", "seo": { "title": "Terms of Service - Lovable", "description": "Terms and conditions" }, "layout": "MarketingLayout" },
+    { "path": "/legal/privacy", "seo": { "title": "Privacy Policy - Lovable", "description": "Privacy policy and data handling" }, "layout": "MarketingLayout" },
+
+    { "path": "/app", "seo": { "title": "Dashboard - Lovable", "description": "Your development dashboard", "index": false }, "layout": "AppLayout", "guard": "auth" },
+    { "path": "/app/playground", "seo": { "title": "Playground - Lovable", "description": "AI-powered development playground" }, "layout": "AppLayout", "guard": "auth" },
+    { "path": "/app/projects", "seo": { "title": "Projects - Lovable", "description": "Manage your projects" }, "layout": "AppLayout", "guard": "auth" },
+    { "path": "/app/projects/:projectId", "seo": { "title": "Project Workspace", "description": "Project development workspace" }, "layout": "AppLayout", "guard": "auth" },
+    { "path": "/app/templates", "seo": { "title": "Templates - Lovable", "description": "Browse project templates" }, "layout": "AppLayout", "guard": "auth" },
+    { "path": "/app/templates/:templateId", "seo": { "title": "Template Details", "description": "Template preview and details" }, "layout": "AppLayout", "guard": "auth" },
+    { "path": "/app/community", "seo": { "title": "Community - Lovable", "description": "Discover community projects" }, "layout": "AppLayout", "guard": "auth" },
+    { "path": "/app/search", "seo": { "title": "Search - Lovable", "description": "Search projects and templates" }, "layout": "AppLayout", "guard": "auth" },
+
+    { "path": "/u/:username", "seo": { "title": "User Profile", "description": "Public user profile" }, "layout": "MarketingLayout" },
+    { "path": "/app/profile", "seo": { "title": "My Profile - Lovable", "description": "Manage your profile" }, "layout": "AppLayout", "guard": "auth" },
+    { "path": "/app/settings", "redirectTo": "/app/settings/profile", "layout": "AppLayout", "guard": "auth" },
+    { "path": "/app/settings/profile", "seo": { "title": "Profile Settings - Lovable", "description": "Update your profile information" }, "layout": "AppLayout", "guard": "auth" },
+    { "path": "/app/settings/security", "seo": { "title": "Security Settings - Lovable", "description": "Manage your account security" }, "layout": "AppLayout", "guard": "auth" },
+    { "path": "/app/settings/api-keys", "seo": { "title": "API Keys - Lovable", "description": "Manage your API keys" }, "layout": "AppLayout", "guard": "auth" },
+    { "path": "/app/settings/notifications", "seo": { "title": "Notification Settings - Lovable", "description": "Configure your notifications" }, "layout": "AppLayout", "guard": "auth" },
+    { "path": "/app/settings/billing", "seo": { "title": "Billing - Lovable", "description": "Manage your subscription and billing" }, "layout": "AppLayout", "guard": "auth" },
+
+    { "path": "/orgs/:orgId", "seo": { "title": "Organization Dashboard", "description": "Organization overview" }, "layout": "AppLayout", "guard": "auth" },
+    { "path": "/orgs/:orgId/projects", "seo": { "title": "Organization Projects", "description": "Organization project management" }, "layout": "AppLayout", "guard": "auth" },
+    { "path": "/orgs/:orgId/members", "seo": { "title": "Team Members", "description": "Manage team members and permissions" }, "layout": "AppLayout", "guard": "auth" },
+    { "path": "/orgs/:orgId/billing", "seo": { "title": "Organization Billing", "description": "Organization subscription and billing" }, "layout": "AppLayout", "guard": "auth" },
+    { "path": "/orgs/:orgId/settings", "seo": { "title": "Organization Settings", "description": "Organization configuration" }, "layout": "AppLayout", "guard": "auth" }
+  ]
+}
